@@ -4,7 +4,7 @@
 #include <stack>
 #include <set>
 
-#include "graphalg.hpp"
+#include "graphalgo.hpp"
 
 using namespace std;
 
