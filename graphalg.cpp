@@ -1,16 +1,23 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+#include <stack>
+#include <set>
 
-namespace graph
+#include "graphalg.hpp"
+
+using namespace std;
+
+namespace graphalgs
 {
-    Graph::Graph(int vertices, bool directed) : numVertices(vertices), isDirected(directed) {
+    Graph_ml::Graph_ml(int vertices, bool directed) : numVertices(vertices), isDirected(directed) {
         adjMatrix.resize(vertices, vector<int>(vertices, 0));
         for (int i = 0; i < vertices; ++i) {
             adjList[i] = vector<int>();
         }
     }
 
-    Graph::Graph(const unordered_map<int, vector<int>>& list, bool directed) 
-        : adjList(list), isDirected(directed) {
+    Graph_ml::Graph_ml(const unordered_map<int, vector<int>>& list, bool directed) : adjList(list), isDirected(directed) {
         numVertices = list.size();
         adjMatrix.resize(numVertices, vector<int>(numVertices, 0));
         for (const auto& pair : list) {
@@ -20,7 +27,7 @@ namespace graph
         }
     }
 
-    Graph::Graph(const vector<vector<int>>& matrix, bool directed) 
+    Graph_ml::Graph_ml(const vector<vector<int>>& matrix, bool directed) 
         : adjMatrix(matrix), isDirected(directed) {
         numVertices = matrix.size();
         for (int i = 0; i < numVertices; ++i) {
@@ -32,7 +39,7 @@ namespace graph
         }
     }
 
-    void Graph::addEdge(int u, int v) {
+    void Graph_ml::addEdge(int u, int v) {
         adjList[u].push_back(v);
         adjMatrix[u][v] = 1;
         if (!isDirected) {
@@ -41,15 +48,15 @@ namespace graph
         }
     }
 
-    unordered_map<int, vector<int>> Graph::getGraphList() const {
+    unordered_map<int, vector<int>> Graph_ml::getGraphList() const {
         return adjList;
     }
 
-    vector<vector<int>> Graph::getGraphMatrix() const {
+    vector<vector<int>> Graph_ml::getGraphMatrix() const {
         return adjMatrix;
     }
 
-    void Graph::printGraphList() const {
+    void Graph_ml::printGraphList() const {
         for (const auto& pair : adjList) {
             cout << pair.first << ": ";
             for (const auto& vertex : pair.second) {
@@ -59,7 +66,7 @@ namespace graph
         }
     }
 
-    void Graph::printGraphMatrix() const {
+    void Graph_ml::printGraphMatrix() const {
         for (const auto& row : adjMatrix) {
             for (const auto& val : row) {
                 cout << val << " ";

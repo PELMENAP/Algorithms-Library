@@ -5,12 +5,12 @@
 #include "graphalg.hpp"
 
 using namespace std;
-using namespace graph;
+using namespace graphalgs;
 
 
 void GraphTest()
 {
-    Graph undirectedGraph(5, false);
+    Graph_ml undirectedGraph(5, false);
 
     undirectedGraph.addEdge(0, 1);
     undirectedGraph.addEdge(0, 4);
@@ -23,16 +23,25 @@ void GraphTest()
     cout << "Undirected Graph - Adjacency List:" << endl;
     undirectedGraph.printGraphList();
 
-    cout << "Undirected Graph - DFS from vertex 0:" << endl;
-    unordered_map<int, bool> visited;
-    for (int i = 0; i < 5; ++i) {
-        visited[i] = false;
-    }
-}
+    cout << "Undirected Graph - Matrix:" << endl;
+    undirectedGraph.printGraphMatrix();
 
-void solve()
-{
+    cout << "Undirected Graph - DFS from vertex 0:" << endl;
     
+
+    cout << "DFS starting from vertex 2:" << endl;
+    vector<int> dfsResult = undirectedGraph.DFS(2);
+    for (int v : dfsResult) {
+        cout << v << " ";
+    }
+    cout << endl;
+
+    cout << "Iterative DFS starting from vertex 2:" << endl;
+    vector<int> dfsIterativeResult = undirectedGraph.DFSIterative(2);
+    for (int v : dfsIterativeResult) {
+        cout << v << " ";
+    }
+    cout << endl;
 }
 
 int main()
@@ -44,7 +53,7 @@ int main()
     signed TT = 1;
     while (TT--)
     {
-        solve();
+        GraphTest();
     }
     return 0;
 }

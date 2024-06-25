@@ -1,31 +1,84 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+#include <stack>
+#include <set>
+using namespace std;
 
-namespace graph
+namespace graphalgs
 {
-    class Graph {
-    private:
-        unordered_map<int, vector<int>> adjList;
-        vector<vector<int>> adjMatrix;
-        int numVertices;
-        bool isDirected;
+    class Graph_ml 
+    {
+        private:
+            unordered_map<int, vector<int>> adjList;
+            vector<vector<int>> adjMatrix;
+            int numVertices;
+            bool isDirected;
 
-    public:
-        Graph(int vertices, bool directed) : numVertices(vertices), isDirected(directed);
+            void DFSUtil(int v, set<int>& visited, vector<int>& component) const {
+                visited.insert(v);
+                component.push_back(v);
 
-        Graph(const unordered_map<int, vector<int>>& list, bool directed);
+                for (int neighbor : adjList.at(v)) {
+                    if (visited.find(neighbor) == visited.end()) {
+                        DFSUtil(neighbor, visited, component);
+                    }
+                }
+            }       
 
-        Graph(const vector<vector<int>>& matrix, bool directed);
+        public:
+            Graph_ml(int vertices, bool directed);
 
-        Graph(const Graph& other) : adjList(other.adjList), adjMatrix(other.adjMatrix), numVertices(other.numVertices), isDirected(other.isDirected);
+            Graph_ml(const unordered_map<int, vector<int>>& list, bool directed);
 
-        void addEdge(int u, int v);
+            Graph_ml(const vector<vector<int>>& matrix, bool directed);
 
-        unordered_map<int, vector<int>> getGraphList() const;
+            Graph_ml(const Graph_ml& other);
 
-        vector<vector<int>> getGraphMatrix() const;
+            void addEdge(int u, int v);
 
-        void printGraphList() const;
+            unordered_map<int, vector<int>> getGraphList() const;
 
-        void printGraphMatrix() const;
+            vector<vector<int>> getGraphMatrix() const;
+
+            void printGraphList() const;
+
+            void printGraphMatrix() const;
+
+            vector<int> DFS(int startVertex) const 
+            {
+                set<int> visited;
+                vector<int> result;
+
+                DFSUtil(startVertex, visited, result);
+
+                return result;
+            }
+
+            vector<int> DFSIterative(int startVertex) const {
+                set<int> visited;
+                vector<int> result;
+                stack<int> stack;
+
+                stack.push(startVertex);
+
+                while (!stack.empty()) {
+                    int vertex = stack.top();
+                    stack.pop();
+
+                    if (visited.find(vertex) == visited.end()) {
+                        visited.insert(vertex);
+                        result.push_back(vertex);
+
+                        for (auto it = adjList.at(vertex).rbegin(); it != adjList.at(vertex).rend(); ++it) {
+                            if (visited.find(*it) == visited.end()) {
+                                stack.push(*it);
+                            }
+                        }
+                    }
+                }
+                return result;
+            }
+            
     };
 }

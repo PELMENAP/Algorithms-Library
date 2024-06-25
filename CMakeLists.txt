@@ -7,7 +7,10 @@ set(CMAKE_C_STANDARD 99)
 #set(CMAKE_CXX_STANDARD 17)
 
 add_library(visual visual.cpp)
+add_library(sortalg sortalg.c)
+add_library(graphalg graphalg.cpp)
+
 add_executable(main main.cpp)
 
 target_compile_options(main PUBLIC "-O2" "-unroll-loops" "-march=native" "-pipe" "-mavx" "-mavx2" "-mfma")
-target_link_libraries(main  sfml-graphics sfml-window sfml-system visual)
+target_link_libraries(main  sfml-graphics sfml-window sfml-system visual sortalg graphalg)
