@@ -2,36 +2,11 @@
 
 #include "visual.hpp"
 #include "sortalg.h"
+#include "graphalg.hpp"
 
 using namespace std;
+using namespace graph;
 
-void DFS(const Graph& graph, int startVertex, unordered_map<int, bool>& visited) {
-    stack<int> stack;
-    stack.push(startVertex);
-
-    int count = 0;
-
-    while (!stack.empty()) {
-        count++;
-        int vertex = stack.top();
-        stack.pop();
-
-        if (!visited[vertex]) {
-            cout << vertex << " ";
-            visited[vertex] = true;
-        }
-        
-        if(count > 1) break;
-
-        const auto& neighbors = graph.getGraphList().at(vertex);
-        for (auto it = neighbors.rbegin(); it != neighbors.rend(); ++it) {
-            cout << it << endl;
-            if (!visited[*it]) {
-                stack.push(*it);
-            }
-        }
-    }
-}
 
 void GraphTest()
 {
@@ -53,7 +28,6 @@ void GraphTest()
     for (int i = 0; i < 5; ++i) {
         visited[i] = false;
     }
-    DFS(undirectedGraph, 0, visited);
 }
 
 void solve()
