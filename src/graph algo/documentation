@@ -1,0 +1,58 @@
+Документация для класса Graph_ml
+Описание
+
+Класс Graph_ml представляет собой граф, который может быть представлен в виде списка смежности или матрицы смежности. Граф может быть ориентированным или неориентированным. Класс включает методы для добавления ребер, выполнения поиска в глубину (DFS) и поиска в ширину (BFS), а также другие полезные функции.
+Приватные поля
+
+    unordered_map<int, vector<int>> adjList - Список смежности для хранения графа.
+    vector<vector<int>> adjMatrix - Матрица смежности для хранения графа.
+    int numVertices - Количество вершин в графе.
+    bool isDirected - Флаг, указывающий, является ли граф ориентированным.
+
+Приватные методы
+
+    void DFSUtil(int v, set<int>& visited, vector<int>& component) const - Вспомогательная функция для рекурсивного выполнения поиска в глубину.
+    void BFSUtil(int startVertex, set<int>& visited, vector<int>& result) const - Вспомогательная функция для выполнения поиска в ширину.
+
+Публичные методы
+
+    Graph_ml(int vertices, bool directed) - Конструктор, принимающий количество вершин и флаг, указывающий, является ли граф ориентированным.
+
+    Graph_ml(const unordered_map<int, vector<int>>& list, bool directed) - Конструктор, принимающий список смежности и флаг, указывающий, является ли граф ориентированным.
+
+    Graph_ml(const vector<vector<int>>& matrix, bool directed) - Конструктор, принимающий матрицу смежности и флаг, указывающий, является ли граф ориентированным.
+
+    Graph_ml(const Graph_ml& other) - Конструктор копирования.
+
+    void addEdge(int u, int v) - Метод для добавления ребра между вершинами u и v.
+
+    void addEdge(int u, int v, int weight) - Метод для добавления ребра с весом между вершинами u и v.
+
+    unordered_map<int, vector<int>> getGraphList() const - Метод для получения списка смежности графа.
+
+    vector<vector<int>> getGraphMatrix() const - Метод для получения матрицы смежности графа.
+
+    int getNumVertices() const - Метод для получения количества вершин в графе.
+
+    void printGraphList() const - Метод для печати списка смежности графа.
+
+    void printGraphMatrix() const - Метод для печати матрицы смежности графа.
+
+    vector<int> DFS(int startVertex) const - Метод для выполнения поиска в глубину (DFS) с заданной стартовой вершиной.
+
+    vector<int> BFS(int startVertex) const - Метод для выполнения поиска в ширину (BFS) с заданной стартовой вершиной.
+
+    vector<int> DFSIterative(int startVertex) const - Метод для выполнения итеративного поиска в глубину (DFS) с заданной стартовой вершиной.
+
+    vector<int> BFSIterative(int startVertex) const - Метод для выполнения итеративного поиска в ширину (BFS) с заданной стартовой вершиной.
+
+Глобальные функции
+
+    vector<int> connectedComponents(const Graph_ml& graph) - Функция для нахождения всех компонент связности в графе.
+    unordered_map<int, int> checkBipartite(const Graph_ml& graph) - Функция для проверки, является ли граф двудольным, и возвращающая разбиение вершин на две доли.
+    vector<vector<int>> floydWarshall(const Graph_ml& graph) - Функция для нахождения кратчайших путей между всеми парами вершин с использованием алгоритма Флойда-Уоршелла.
+    vector<int> dijkstra(const Graph_ml& graph, int startVertex) - Функция для нахождения кратчайших путей от заданной стартовой вершины до всех других вершин с использованием алгоритма Дейкстры.
+    Graph_ml kruskalMST(const Graph_ml& graph) - Функция для нахождения минимального остовного дерева в графе с использованием алгоритма Крускала.
+    int fordFulkerson(const Graph_ml& graph, int source, int sink) - Функция для нахождения максимального потока в сети с использованием алгоритма Форда-Фалкерсона.
+    vector<int> topologicalSort(const Graph_ml& graph) - Функция для выполнения топологической сортировки ориентированного ацикличного графа.
+    vector<pair<int, int>> hopcroftKarp(const Graph_ml& graph) - Функция для нахождения максимального паросочетания в двудольном графе с использованием алгоритма Хопкрофта-Карпа.
