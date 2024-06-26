@@ -29,6 +29,17 @@ namespace graphalgs
         cout << endl;
     }
 
+    struct Edge {
+        int src, dest, weight;
+
+        Edge(int source, int destination, int w) : src(source), dest(destination), weight(w) {}
+
+        bool operator<(const Edge &other) const {
+            return weight < other.weight;
+        }
+    };
+
+
     Graph_ml::Graph_ml(int vertices, bool directed) : numVertices(vertices), isDirected(directed) 
     {
         adjMatrix.resize(vertices, vector<int>(vertices, 0));

@@ -12,16 +12,6 @@ using namespace std;
 
 namespace graphalgs
 {
-    struct Edge {
-        int src, dest, weight;
-
-        Edge(int source, int destination, int w) : src(source), dest(destination), weight(w) {}
-
-        bool operator<(const Edge &other) const {
-            return weight < other.weight;
-        }
-    };
-
     void printMatrix(const vector<vector<int>>& matrix);
 
     class Graph_ml 
@@ -65,10 +55,6 @@ namespace graphalgs
     vector<vector<int>> floydWarshall(const Graph_ml& graph);
 
     vector<int> dijkstra(const Graph_ml& graph, int startVertex);
-
-    int find(vector<int> &parent, int i);
-
-    void Union(vector<int> &parent, int x, int y);
 
     Graph_ml kruskalMST(const Graph_ml &graph);
 
