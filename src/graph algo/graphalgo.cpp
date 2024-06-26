@@ -514,59 +514,6 @@ namespace graphalgs
         return topoOrder;
     }
 
-    bool bfs(const Graph_ml& graph, int u, unordered_map<int, vector<int>>& adjList, vector<int>& pairU, vector<int>& pairV, vector<int>& dist) 
-    {
-        queue<int> q;
-        for (int v : adjList[u]) 
-        {
-            if (pairV[v] == -1) 
-            {
-                dist[v] = 0;
-                q.push(v);
-            }
-        }
-        bool found = false;
-        while (!q.empty()) 
-        {
-            int v = q.front();
-            q.pop();
-            for (int u : adjList[v]) 
-            {
-                int uPrime = pairU[u];
-                if (uPrime == -1) 
-                {
-                    found = true;
-                } else if (dist[uPrime] == -1) 
-                {
-                    dist[uPrime] = dist[v] + 1;
-                    q.push(uPrime);
-                }
-            }
-        }
-        return found;
-    }
-
-    bool dfs(const Graph_ml& graph, int u, unordered_map<int, vector<int>>& adjList, vector<int>& pairU, vector<int>& pairV, vector<int>& dist) 
-    {
-        for (int v : adjList[u]) 
-        {
-            int uPrime = pairU[u];
-            if (v == uPrime) 
-            {
-                continue;
-            }
-            int vPrime = pairV[v];
-            if (vPrime == -1 || (dist[vPrime] == dist[u] + 1 && dfs(graph, vPrime, adjList, pairU, pairV, dist))) 
-            {
-                pairU[u] = v;
-                pairV[v] = u;
-                return true;
-            }
-        }
-        dist[u] = -1;
-        return false;
-    }
-
     vector<pair<int, int>> hopcroftKarp(const Graph_ml& graph) 
     {
         unordered_map<int, vector<int>> adjList = graph.getGraphList();
